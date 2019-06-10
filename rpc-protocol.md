@@ -28,10 +28,10 @@ Examples:
 The asyncid is used to receive responses out of order so that they do not block other responses.
 Any request can include an asyncid and the server must respond with the exact same asyncid. The
 asyncid should be unique. If the asyncid is a string then it should not start with an underscore
-character "_" (used by server to send messages). If the asyncid is null then the server will
+character "\_" (used by server to send messages). If the asyncid is null then the server will
 not send a response for the request. Some commands (such as SUBSCRIBE) can send more than 1
 response. The server can send an unsolicited message to the client by using an asyncid that is
-a string starting with an underscore "_" character.
+a string starting with an underscore "\_" character.
 
 
 ## Response
