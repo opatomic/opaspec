@@ -41,6 +41,8 @@ Examples:
 | 0x4e | null         |
 | 0x46 | false        |
 | 0x54 | true         |
+| 0x50 | -inf         |
+| 0x51 | +inf         |
 | 0x4f | zero         |
 | 0x41 | empty blob   |
 | 0x52 | empty string |
