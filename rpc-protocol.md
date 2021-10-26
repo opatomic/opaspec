@@ -27,10 +27,13 @@ The asyncid is used to receive responses out of order so that they do not block 
 Every request includes an asyncid and the server must respond with the exact same asyncid. The
 asyncid should be unique (unless it is null). If the asyncid is a string then it should not start
 with an underscore character "\_" (used by server to send messages). If the asyncid is false then
-the server will not send a response for the request. Some commands (such as SUBSCRIBE) can send
-more than 1 response. These commands must use a non-null async id. The server can send an
-unsolicited message to the client by using an asyncid that is a string starting with an
-underscore "\_" character.
+the server will not send a response for the request. The server can send an unsolicited message
+to the client by using an asyncid that is a string starting with an underscore "\_" character.
+The async id cannot be sent back from the server as a canonical equivalent - it must be the exact
+same bytes (ie, cannot normalize a string or convert an int to a bigint, or shift the exponent of
+a dec, etc). Requests with a null async-id must receive exactly 1 response and responses must be
+sent in the order the requests were received. Requests with a non-null async-id can receive more
+than 1 response (depends on the command).
 
 #### null async id
 
@@ -45,10 +48,7 @@ be sent out of order.
 
 The server's response is an array containing the request's asyncid, a result, and an
 error (optional). The result must be null if there is an error; otherwise error must not be
-present or be null. The async id cannot be sent back from server as a canonical equivalent - it must
-be the exact same bytes (ie, cannot normalize a string or convert an int to a bigint, or shift
-the exponent of a dec, etc). Requests can receive more than 1 response (depends on the command).
-All responses that have a null asyncid must be sent in the order the requests were received.
+present or be null.
 
 Examples:
 
