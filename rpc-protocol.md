@@ -47,8 +47,9 @@ be sent out of order.
     [asyncid, result, error]
 
 The server's response is an array containing the request's asyncid, a result, and an
-error (optional). The result must be null if there is an error; otherwise error must not be
-present or be null.
+error (optional). The result should be null if there is an error; otherwise error should not be
+present or be null. If result and error are both non-null then result should be ignored and error
+is the correct response (error may have occurred in middle of generating/sending result).
 
 Examples:
 
