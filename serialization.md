@@ -155,9 +155,9 @@ Example:
 
 A zero length blob is serialized as the single byte 0x41. Any other blob is serialized as:
 
-    [0x42 varint bytes]
+    [0x42 len bytes]
 
-where varint represents the number of bytes, and bytes represents the raw bytes.
+where len represents the number of bytes serialized as a varint, and bytes represents the raw bytes.
 
 Example:
 
@@ -170,9 +170,9 @@ Example:
 
 A zero length string is serialized as the single byte 0x52. Any other string is serialized as:
 
-    [0x53 varint chars]
+    [0x53 len chars]
 
-where varint represents the number of chars, and chars is the sequence of UTF-8 characters.
+where len represents the byte-length of chars serialized as a varint, and chars is the sequence of UTF-8 characters.
 
 Example:
 
