@@ -20,8 +20,8 @@ This is a concept that is used to help serialize many different object types. An
 7 bits at a time starting with the least significant 7 bit chunk. The most significant bit of each byte
 is set to indicate that there's another 7 bit chunk.
 Refer [here](https://github.com/multiformats/unsigned-varint) for more info. This format further restricts
-a varint to be 1-9 bytes long and represent an integer in the range 1 to (2^63)-1. The final byte
-of a varint cannot be zero. Therefore, a varint cannot encode the number zero.
+a varint to be 1-9 bytes long and represent an integer in the range 0 to (2^63)-1. If the varint is encoded
+with more than 1 byte then the last byte cannot be zero.
 
 Examples:
 
@@ -118,8 +118,8 @@ A bigint is serialized as
 
     [type len bytes]
 
-where len is the number of bytes serialized as a varint and bytes is the bigint serialized in big-endian form. The first byte
-following length must not be 0. Therefore, 0 cannot be serialized as a bigint.
+where len is the number of bytes serialized as a varint and bytes is the bigint serialized in big-endian form. If len
+is greater than 1, then the first byte following len must not be 0. len must be greater than 0.
 
 Example:
 
